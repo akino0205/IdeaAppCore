@@ -1,5 +1,7 @@
 ﻿@page "/"
 @page "/Index"
+
+@using IdeaAppCore.Admin.Components.LineChart
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
@@ -130,7 +132,7 @@
                 <!-- Card Body -->
                 <div class="card-body">
                     <div class="chart-area">
-                        <canvas id="myAreaChart"></canvas>
+                        <TimeLineChartComponent/>
                     </div>
                 </div>
             </div>
@@ -160,7 +162,7 @@
                 <!-- Card Body -->
                 <div class="card-body">
                     <div class="chart-pie pt-4 pb-2">
-                        <canvas id="myPieChart"></canvas>
+                        <DoughnutChartComponent />
                     </div>
                     <div class="mt-4 text-center small">
                         <span class="mr-2">
