@@ -13,9 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdeaAppCore.Models", "IdeaA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdeaAppCore.Models.Tests", "IdeaAppCore.Models.Tests\IdeaAppCore.Models.Tests.csproj", "{1C4CCF1C-F8A4-4744-BB43-B81C73ED34BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdeaAppCore.Apis", "IdeaAppCore.Apis\IdeaAppCore.Apis.csproj", "{E965D41C-2B03-4A67-B8DE-F76ACD4E2706}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdeaAppCore.Apis", "IdeaAppCore.Apis\IdeaAppCore.Apis.csproj", "{E965D41C-2B03-4A67-B8DE-F76ACD4E2706}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdeaAppCore.SingleSignOn", "IdeaAppCore.SingleSignOn\IdeaAppCore.SingleSignOn.csproj", "{4E6743E6-AE02-4C8E-B7B0-48DF5D6BEE39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdeaAppCore.SingleSignOn", "IdeaAppCore.SingleSignOn\IdeaAppCore.SingleSignOn.csproj", "{4E6743E6-AE02-4C8E-B7B0-48DF5D6BEE39}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
