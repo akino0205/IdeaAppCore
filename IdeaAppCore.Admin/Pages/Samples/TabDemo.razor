@@ -1,0 +1,76 @@
+﻿@page "/Samples/TabDemo"
+
+<h3>TabDemo</h3>
+
+@* jquery *@
+<h5>Jquery를 활용한 Tab</h5>
+<nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Home</a>
+        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
+        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</a>
+    </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">탭1</div>
+    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">탭2</div>
+    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">탭3</div>
+</div>
+
+<hr />
+
+@* Blazor *@
+<h5>Blazor를 활용한 Tab</h5>
+<nav>
+    <div class="nav nav-tabs">
+        <a class="nav-item nav-link @tab1Active" @onclick="@(() => TabClicked(1))">Home</a>
+        <a class="nav-item nav-link @tab2Active" @onclick="@(() => TabClicked(2))">Profile</a>
+        <a class="nav-item nav-link @tab3Active" @onclick="@(() => TabClicked(3))">Contact</a>
+    </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade @tabPane1Active">탭1</div>
+    <div class="tab-pane fade @tabPane2Active">탭2</div>
+    <div class="tab-pane fade @tabPane3Active">탭3</div>
+</div>
+
+@code {
+    string tab1Active = "active";
+    string tab2Active = "";
+    string tab3Active = "";
+
+    string tabPane1Active = "show active";
+    string tabPane2Active = "";
+    string tabPane3Active = "";
+
+    public void TabClicked(int tabId)
+    {
+        if (tabId == 2)
+        {
+            tab1Active = "";
+            tab2Active = "active";
+            tab3Active = "";
+            tabPane1Active = "";
+            tabPane2Active = "show active";
+            tabPane3Active = "";
+        }
+        else if (tabId == 3)
+        {
+            tab1Active = "";
+            tab2Active = "";
+            tab3Active = "active";
+            tabPane1Active = "";
+            tabPane2Active = "";
+            tabPane3Active = "show active";
+        }
+        else
+        {
+            tab1Active = "active";
+            tab2Active = "";
+            tab3Active = "";
+            tabPane1Active = "show active";
+            tabPane2Active = "";
+            tabPane3Active = "";
+        }
+    }
+}
