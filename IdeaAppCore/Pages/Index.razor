@@ -1,8 +1,6 @@
 ﻿@page "/"
 @page "/Index"
 
-@using IdeaAppCore.Components.Home 
-
 <header>
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
@@ -192,17 +190,5 @@
         </div>
     </div>
 
-    <div class="row mb-4">
-        <div class="col-md-6">
-            <h3><i class="fa fa-wrench"></i> 현재 사이트에서 사용된 기술 리스트</h3>
-            <IdeaAppCore.Components.Home.TechListComponent>
-            </IdeaAppCore.Components.Home.TechListComponent>
-        </div>
-        <div class="col-md-6">
-            <h3><i class="fa fa-sitemap"></i> 현재 사이트와 관련된 추천 사이트</h3>
-            <SiteListComponent>
-            </SiteListComponent>
-        </div>
-    </div>
 </div>
 <!-- /.container -->
