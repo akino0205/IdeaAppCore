@@ -1,0 +1,30 @@
+﻿<ul>
+    @foreach (var site in Sites)
+    {
+        <li><a href="@site.Url" target="_blank">@site.Title (@site.Description)</a></li>
+    }
+</ul>
+
+@code {
+    private List<Site> sites;
+
+    public List<Site> Sites
+    {
+        get { return sites; }
+        set { sites = value; }
+    }
+
+    protected override void OnInitialized()
+    {
+        sites = new List<Site>()
+        {
+            new Site{ Id = 1, Title = "길벗출판사", Url = "http://gilbut.co.kr", Description="ASP.NET Core 서적 출간" },
+            new Site{ Id = 2, Title = "데브렉", Url = "http://www.devlec.com", Description="VisyalAcademy 사이트 제작 관련 동영상 강의 제공" },
+            new Site{ Id = 3, Title = "Teayo.NET", Url = "http://www.teayo.net", Description="ASP.NET Core 강좌 제공" },
+            new Site{ Id = 4, Title = "ASP.NET Korea User Group", Url = "http://www.facebook.com/groups/AspxKorea/", Description="ASP.NET 한국 사용자 그룹" },
+            new Site{ Id = 5, Title = "닷넷코리아", Url = "http://www.dotnetkorea.com", Description = "박용준 MVP 개인 홈페이지"},
+            new Site{ Id = 6, Title = "비주얼아카데미", Url = "http://www.youtube.com/user/visualacademy", Description = "박용준 MVP 개인 유튜브 채널"},
+            new Site{ Id = 7, Title = "ASP.NET", Url = "http://www.asp.net", Description = "ASP.NET 공식 사이트"}
+        };
+    }
+}
