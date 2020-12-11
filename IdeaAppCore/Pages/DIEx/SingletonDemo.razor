@@ -1,0 +1,58 @@
+﻿@page "/DI/SingletonDemo"
+@using IdeaAppCore.Services
+
+@*Blazor에서는 생성자 대신 @inject로 할 수 있다.
+    InfoService는 Startup.cs의 ConfigureServices에서 의존성을 해결해준다.*@
+@inject InfoService _svc
+@inject IInfoService _svc2
+Test For @testMsg
+<hr />
+<button @onclick="OnClick">1. 직접 대입</button>
+<button @onclick="InfoServiceDemo">2. 객체 생성</button>
+<button @onclick="ConstructorInjectionDemo">3. InfoService 클래스 의존성 주입</button>
+<button @onclick="ConstructorInjectionDemoWithIntergface">4. IInfoService 인터페이스 의존성 주입</button>
+
+
+@code {
+    private string testMsg;
+    protected override void OnInitialized()
+    {
+    }
+
+    @*1. 직접 대입 *@
+    private void OnClick()
+    {
+        testMsg = "직접대입";
+    }
+
+    @*2. 객체 생성 *@
+    private void InfoServiceDemo()
+    {
+        //의존성이 강함. InfoService의 결합도가 높다.
+        InfoService svc = new InfoService();
+        testMsg = svc.GetUrl("2. 객체 생성");
+    }
+
+    @*3. InfoService 클래스 의존성 주입 *@
+    //Blazor에서는 이와같은 방식을 쓰지 않고 @inject로 한다.
+    @*
+        private readonly InfoService _svc;
+        public SingletonDemo(InfoService svc)
+        {
+            _svc = svc;
+        }
+    *@
+    private void ConstructorInjectionDemo()
+    {
+        //DI Container 의존성 주입 -> InfoService와의 결합도를 낮추기 위해...
+        testMsg = _svc.GetUrl("3. InfoService 클래스 의존성 주입");
+    }
+
+    @*4. IInfoService 인터페이스 의존성 주입*@
+    private void ConstructorInjectionDemoWithIntergface()
+    {
+        //DI Container 의존성 주입 -> InfoService와의 결합도를 낮추기 위해...
+        testMsg = _svc2.GetUrl("4. IInfoService 인터페이스 의존성 주입");
+    }
+
+}
