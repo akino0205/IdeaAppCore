@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace IdeaAppCore
 {
@@ -42,18 +43,27 @@ namespace IdeaAppCore
 
             //[DI] IInfoService 인터페이스 의존성 주입
             services.AddSingleton<IInfoService, InfoService>();
+
+            //[옵션패턴]IOptionSnapshot, IOptionMonitor
+            services.Configure<MyServiceOptions>(Configuration.GetSection(MyServiceOptions.MyService));
+
+            //[옵션패턴]IConfigureNamedOptions
+            services.Configure<MyServiceOptions>(MyServiceOptions.strArrOption, Configuration.GetSection($"{MyServiceOptions.MyService}:{MyServiceOptions.strArrOption}"));
+            services.Configure<MyServiceOptions>(MyServiceOptions.strArrOption2, Configuration.GetSection($"{MyServiceOptions.MyService}:{MyServiceOptions.strArrOption2}"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
         {
             if (env.IsDevelopment())
             {
+                logger.LogInformation("In Development.");
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
             }
             else
             {
+                logger.LogInformation("Not Development.");
                 app.UseExceptionHandler("/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();

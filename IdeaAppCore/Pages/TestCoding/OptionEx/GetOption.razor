@@ -1,0 +1,64 @@
+﻿@page "/OptionEx/Get"
+
+@using Microsoft.Extensions.Options;
+@inject IOptionsMonitor<MyServiceOptions> optionsDelegate
+@inject IOptionsSnapshot<MyServiceOptions> snapshotOptionsAccessor
+@inject IOptionsSnapshot<MyServiceOptions> namedOptionsAccessor
+
+<button @onclick="UseIOptionsMonitor">UseIOptionsMonitor</button>
+<button @onclick="UseIOptionsSnapshot">UseIOptionsSnapshot</button>
+<hr />
+<h2>사용 서비스 : @serviceName</h2>
+<h3>strOption : @strOption</h3>
+<h3>intOption : @intOption</h3>
+<h3>boolOption : @boolOption</h3>
+<br />
+<hr />
+<h2>사용 서비스 : UseIConfigureNamedOptions</h2>
+<button @onclick="(e => UseIConfigureNamedOptions(1))">UseIConfigureNamedOptions</button>
+<button @onclick="(e => UseIConfigureNamedOptions(2))">UseIConfigureNamedOptions</button>
+<h3>from : @from</h3>
+<h3>item1 : @item1</h3>
+<h3>item2 : @item2</h3>
+<h3>item3 : @item3</h3>
+
+
+@code {
+    //참고 기사링크 : https://codeburst.io/options-pattern-in-net-core-a50285aeb18d
+    private string serviceName;
+    private string from;
+    private string item1;
+    private string item2;
+    private string item3;
+    private string strOption;
+    private int intOption;
+    private bool boolOption;
+
+    protected void UseIOptionsMonitor()
+    {
+        serviceName = "IOptionsMonitor";
+        var serviceValue = optionsDelegate.CurrentValue;
+        strOption = serviceValue.strOption;
+        intOption = serviceValue.intOption;
+        boolOption = serviceValue.boolOption;
+    }
+
+    protected void UseIOptionsSnapshot()
+    {
+        serviceName = "IOptionsSnapshot";
+        var serviceValue = snapshotOptionsAccessor.Value;
+        strOption = serviceValue.strOption;
+        intOption = serviceValue.intOption;
+        boolOption = serviceValue.boolOption;
+    }
+
+    protected void UseIConfigureNamedOptions(int arrOptionFrom)
+    {
+        from = $"strArrOption{arrOptionFrom}";
+        string strArrOption = arrOptionFrom != 2 ? MyServiceOptions.strArrOption : MyServiceOptions.strArrOption2;
+        var fromItem = namedOptionsAccessor.Get(strArrOption);
+        item1 = fromItem.item1;
+        item2 = fromItem.item2;
+        item3 = fromItem.item3;
+    }
+}
