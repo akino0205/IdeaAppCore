@@ -17,7 +17,7 @@ namespace IdeaAppCore
                 {
                     logging.ClearProviders();
                     logging.AddConsole();
-                })
+                }) //log
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();

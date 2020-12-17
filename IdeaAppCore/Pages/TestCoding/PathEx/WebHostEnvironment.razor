@@ -1,0 +1,22 @@
+﻿@page "/pathEx"
+
+@using Microsoft.AspNetCore.Hosting
+
+@inject IWebHostEnvironment env
+
+<h3>WebHostEnvironment</h3>
+
+<h4>contentRootPath : @contentRootPath </h4>
+<h4>webRootPath : @webRootPath</h4>
+<hr />
+
+@code {
+    private string contentRootPath;
+    private string webRootPath;
+
+    protected override void OnInitialized()
+    {
+        contentRootPath = env.ContentRootPath;
+        webRootPath = env.WebRootPath;
+    }
+}

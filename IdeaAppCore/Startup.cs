@@ -50,6 +50,10 @@ namespace IdeaAppCore
             //[옵션패턴]IConfigureNamedOptions
             services.Configure<MyServiceOptions>(MyServiceOptions.strArrOption, Configuration.GetSection($"{MyServiceOptions.MyService}:{MyServiceOptions.strArrOption}"));
             services.Configure<MyServiceOptions>(MyServiceOptions.strArrOption2, Configuration.GetSection($"{MyServiceOptions.MyService}:{MyServiceOptions.strArrOption2}"));
+
+            //[CustomLog] ColorConsoleLoggerConfiguration 클래스 의존성 주입
+            services.AddSingleton<ColorConsoleLoggerConfiguration>();
+            services.AddSingleton<ILogger, ColorConsoleLogger>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

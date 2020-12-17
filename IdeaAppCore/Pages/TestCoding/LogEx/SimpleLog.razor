@@ -1,0 +1,17 @@
+﻿@page "/LogEx/SimpleLog"
+@page "/LogEx/Index"
+@page "/LogEx"
+
+@using Microsoft.Extensions.Logging;
+
+@inject ILogger<Index> logger
+
+<h3>SimpleLog</h3>
+
+@code {
+    protected override void OnInitialized()
+    {
+        logger.LogInformation("OnInitSimpleLog");
+        logger.LogInformation("Log Test Success?!?!");
+    }
+}

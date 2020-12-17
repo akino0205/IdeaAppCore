@@ -1,0 +1,101 @@
+﻿@page "/Input/WithCompo"
+@inject IPropertiesService service
+@inject NavigationManager navigationManager
+<div class="modal fade show" tabindex="-1" role="dialog" style="display:block" id="myModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Group 생성</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" @onclick="CloseCreatePopup">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <EditForm Model="@insertData" OnValidSubmit="@CreateGroup">
+                    <input type="checkbox" />Trial 그룹
+                    <DataAnnotationsValidator />
+                    <label>Group ID</label>
+                    <InputText @bind-Value="insertData.GRP_ID" class="form-control" />
+                    <ValidationMessage For="@(() => insertData.GRP_ID)" />
+
+                    <label>Group Description</label>
+                    <InputText @bind-Value="insertData.GRP_DESC" class="form-control" />
+                    <ValidationMessage For="@(() => insertData.GRP_DESC)" />
+
+                    <label>Group 등급 - Default Level</label>
+                    <IdeaAppCore.Pages.TestCoding.InputFormEx.Components.GroupLevelSelection 
+                            bindLevel="@insertData.GRP_LEVEL" OnChangeLevel="SetLevel" />
+
+                    <label>다운로드 건수</label>
+                    <InputNumber @bind-Value="insertData.GRP_DOWNLMT" class="form-control" />
+
+                    <label>Pack 추가</label>
+                    <InputSelect @bind-Value="selectPack" class="form-control">
+                        @foreach (var data in packData)
+                        {
+                            <option value="@data.pack">@data.text</option>
+                        }
+                    </InputSelect>
+                    <button type="button" @onclick="AddPack" class="btn btn-primary">ADD</button>
+                    <InputTextArea @bind-Value="insertData.GRP_PACK" class="form-control" />
+                    <ValidationMessage For="@(() => insertData.GRP_PACK)" />
+
+                    <label>만료일</label>
+                    <InputDate @bind-Value="insertData.GRP_EXPIRY" class="form-control" />
+                    <ValidationMessage For="@(() => insertData.GRP_EXPIRY)" />
+
+                    <label>MEMO</label>
+                    <InputText @bind-Value="insertData.GRP_MEMO" class="form-control" />
+
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </EditForm>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public EventCallback<bool> ShowPopup { get; set; }
+
+    private GroupModel insertData = new GroupModel()
+    {
+        GRP_SVCTYPE = "FOCUST3",
+        GRP_DOWNLMT = 100000,
+        GRP_PACK = string.Empty,
+        GRP_COLSET = string.Empty,
+        GRP_LEVEL = 100,
+        GRP_EXPIRY = DateTime.Now.AddDays(1).Date,
+        GRP_ONLINE = 'N'
+    };
+
+    private List<PackModel> packData;
+
+    private string selectPack;
+
+    protected override void OnInitialized()
+    {
+        packData = service.GetPackList();
+        selectPack = packData.FirstOrDefault().pack;
+    }
+
+    protected void SetLevel(int level)
+    {
+        insertData.GRP_LEVEL = level;
+    }
+
+    protected void AddPack()
+    {
+        insertData.GRP_PACK = string.Join("|", insertData.GRP_PACK, selectPack);
+    }
+
+    protected void CreateGroup(EditContext editContext)
+    {
+
+    }
+
+    protected void CloseCreatePopup()
+    {
+        ShowPopup.InvokeAsync(false);
+    }
+}

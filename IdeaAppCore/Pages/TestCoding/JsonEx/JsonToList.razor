@@ -1,0 +1,55 @@
+﻿@page "/JsonEx/JsonToList"
+@*
+    ****************************************
+                    미완성
+    ****************************************
+*@
+
+@using Microsoft.AspNetCore.Hosting
+@using System.IO
+@using Newtonsoft.Json.Linq
+@using System.Text
+
+@inject IWebHostEnvironment env
+
+<h3>JsonToList</h3>
+
+<h2>List Text</h2>
+@*@foreach (var data in _packList)
+    {
+        <label>data.pack : @data.pack</label>
+        <label>data.text : @data.text</label>
+    }*@
+
+<h2>Select</h2>
+<select @bind="_packList" class="form-control">
+    @foreach (var data in _packList)
+    {
+        <option value="@data.pack">@data.text</option>
+    }
+</select>
+
+@code {
+    private List<PackModel> _packList;
+
+    protected override void OnInitialized()
+    {
+        _packList = GetPackList();
+    }
+
+    public List<PackModel> GetPackList()
+    {
+        List<PackModel> packList = new List<PackModel>();
+        var jsonString = File.ReadAllText(env.ContentRootPath + "\\App_Data\\ManagerProperties.json", Encoding.Default);
+        JObject root = JObject.Parse(jsonString);
+        foreach (var item in root["AddPackList"])
+        {
+            var jProperty = item.ToObject<JProperty>();
+            PackModel model = new PackModel();
+            model.text = jProperty.Name;
+            model.pack = jProperty.Value.ToString();
+            packList.Add(model);
+        }
+        return packList;
+    }
+}
