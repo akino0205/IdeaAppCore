@@ -85,11 +85,6 @@
         selectPack = packData.FirstOrDefault().pack;
     }
 
-    protected void SetLevel(int level)
-    {
-        insertData.GRP_LEVEL = level;
-    }
-
     protected void AddPack()
     {
         insertData.GRP_PACK = string.Join("|", insertData.GRP_PACK, selectPack);
