@@ -8,7 +8,7 @@ namespace IdeaAppCore.Models
 {
     public class LevelModel 
     {
-        public string level { get; set; }
+        public int level { get; set; }
         public string text { get; set; }
 
     }

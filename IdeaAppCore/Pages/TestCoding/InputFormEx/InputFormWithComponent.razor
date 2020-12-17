@@ -23,8 +23,12 @@
                     <ValidationMessage For="@(() => insertData.GRP_DESC)" />
 
                     <label>Group 등급 - Default Level</label>
+
+                    @* *************************
+                            Component추가
+                    ************************** *@
                     <IdeaAppCore.Pages.TestCoding.InputFormEx.Components.GroupLevelSelection 
-                            bindLevel="@insertData.GRP_LEVEL" OnChangeLevel="SetLevel" />
+                        bindLevel="@insertData.GRP_LEVEL.ToString()" OnChange="SetLevel"/>
 
                     <label>다운로드 건수</label>
                     <InputNumber @bind-Value="insertData.GRP_DOWNLMT" class="form-control" />
@@ -79,9 +83,12 @@
         selectPack = packData.FirstOrDefault().pack;
     }
 
-    protected void SetLevel(int level)
+    /****************************
+       Component 관련 함수 추가
+    ****************************/
+    public void SetLevel(string level)
     {
-        insertData.GRP_LEVEL = level;
+        insertData.GRP_LEVEL = Int32.Parse(level);
     }
 
     protected void AddPack()

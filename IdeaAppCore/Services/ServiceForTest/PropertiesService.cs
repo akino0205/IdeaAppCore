@@ -28,7 +28,7 @@ namespace IdeaAppCore.Services
             {
                 var jProperty = item.ToObject<JProperty>();
                 LevelModel model = new LevelModel();
-                model.level = jProperty.Name;
+                model.level = Int32.Parse(jProperty.Name);
                 model.text = jProperty.Value.ToString();
                 levelList.Add(model);
             }

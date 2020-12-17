@@ -1,32 +1,27 @@
 ﻿@inject IPropertiesService service
 
-<InputSelect @bind-Value="level" class="form-control">
+<select value="@bindLevel" @onchange="@OnChangeSelection" class="form-control">
     @foreach (var data in levelData)
     {
         <option value="@data.level">@data.text</option>
     }
-</InputSelect>
+</select>
 
 @code {
     [Parameter]
-    public int bindLevel
-    {
-        get => level;
-        set
-        {
-            if (level == value) return;
-            level = value;
-            OnChangeLevel.InvokeAsync(value);
-        }
-    }
-    [Parameter]
-    public EventCallback<int> OnChangeLevel { get; set; }
+    public string bindLevel { get; set; }
 
-    private int level;
+    [Parameter] public EventCallback<string> OnChange { get; set; }
+
     private List<LevelModel> levelData;
 
     protected override void OnInitialized()
     {
         levelData = service.GetLevelList();
+    }
+
+    protected void OnChangeSelection(ChangeEventArgs e)
+    {
+        OnChange.InvokeAsync(e.Value.ToString());
     }
 }
