@@ -1,0 +1,14 @@
+﻿@page "/AppSettingEx"
+@inject AppSettingService service
+
+<h3>AppSettingEx</h3>
+
+<h3>appSettings.json - UserManagerAPIBaseAddress : @userManagerAPIBaseAddress</h3>
+
+@code {
+    private string userManagerAPIBaseAddress;
+    protected override void OnInitialized()
+    {
+        userManagerAPIBaseAddress = service.GetUserManageAPIBaseAddress();
+    }
+}

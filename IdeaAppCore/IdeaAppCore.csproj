@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\TestCoding\AppSettingEx\" />
+    <Folder Include="Pages\TestCoding\ConnectWebAPIEx\" />
   </ItemGroup>
 
 </Project>
