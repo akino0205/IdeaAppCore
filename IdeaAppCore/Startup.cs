@@ -54,6 +54,10 @@ namespace IdeaAppCore
             //[CustomLog] ColorConsoleLoggerConfiguration 클래스 의존성 주입
             services.AddSingleton<ColorConsoleLoggerConfiguration>();
             services.AddSingleton<ILogger, ColorConsoleLogger>();
+
+            //Generic Interface Ex
+            //services.AddTransient<IDbService<TGroup, TGroup>, DbService>();
+            //services.AddTransient<IDbService<GroupModel, GroupModel>, DbServiceWithModel>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

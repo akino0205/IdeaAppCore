@@ -26,4 +26,8 @@
     <ProjectReference Include="..\IdeaAppCore.Model\IdeaAppCore.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\TestCoding\AppSettingEx\" />
+  </ItemGroup>
+
 </Project>
