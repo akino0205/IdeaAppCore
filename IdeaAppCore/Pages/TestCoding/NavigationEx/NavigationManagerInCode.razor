@@ -1,0 +1,13 @@
+﻿@inject NavigationManager NavigationManager
+
+<h3>NavigationManagerInCode</h3>
+
+<button type="button" @onclick="ClickForNavigation">Click Here</button>
+
+
+@code {
+    private void ClickForNavigation()
+    {
+        NavigationManager.NavigateTo("/Group");
+    }
+}
